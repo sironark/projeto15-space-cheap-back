@@ -7,7 +7,28 @@
     "joi": "^17.9.2",
     "mongodb": "^5.7.0",
     "node": "^20.4.0",
-    "nodemon": "^3.0.1",
     "uuid": "^9.0.0"
+  },
+  "name": "projeto15-space-cheap-back",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "app.js",
+  "scripts": {
+    "start": "node ./src/app.js",
+    "dev": "nodemon ./src/app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sironark/projeto15-space-cheap-back.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sironark/projeto15-space-cheap-back/issues"
+  },
+  "homepage": "https://github.com/sironark/projeto15-space-cheap-back#readme",
+  "description": "",
+  "devDependencies": {
+    "nodemon": "^3.0.1"
   }
 }
