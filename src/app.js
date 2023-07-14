@@ -40,6 +40,14 @@ app.get('/products', async (req, res) => {
         }
 })
 
+app.get("/carrinho", async (req,res)=>{
+        try {
+                res.send("ok")
+        } catch (error) {
+                res.status(500).send(error.message)
+        }
+})
+
 // servidor rodando na porta 5000
 const port = process.env.PORT || 5000
 app.listen(port, () => console.log(`Running server on port ${port}`))

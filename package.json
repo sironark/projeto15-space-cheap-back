@@ -11,10 +11,10 @@
   "name": "projeto15-space-cheap-back",
   "version": "1.0.0",
   "type": "module",
-  "main": "app.js",
+  "main": "./src/app.js",
   "scripts": {
     "start": "node ./src/app.js",
-    "dev": "nodemon ./src/app.js"
+    "dev": "npx nodemon ./src/app.js"
   },
   "repository": {
     "type": "git",
