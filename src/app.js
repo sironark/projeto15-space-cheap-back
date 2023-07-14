@@ -39,6 +39,7 @@ app.get('/products', async (req, res) => {
                 return res.status(500).send(error)
         }
 })
+
 // servidor rodando na porta 5000
 const port = process.env.PORT || 5000
 app.listen(port, () => console.log(`Running server on port ${port}`))
