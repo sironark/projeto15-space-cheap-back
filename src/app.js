@@ -11,7 +11,7 @@ dotenv.config()
 
 // conectando ao banco
 const mongoClient = new MongoClient(process.env.DATABASE_URL);
-let db;
+export let db;
 
 mongoClient.connect()
         .then(() => {
@@ -40,9 +40,13 @@ app.get('/products', async (req, res) => {
         }
 })
 
-app.get("/carrinho", async (req,res)=>{
-        try {
-                res.send("ok")
+app.get("/cart/:userId", async (req,res)=>{
+        const userId = req.params.userId
+        //const userId = {id: 123456789} // ide será passado no params
+        console.log(userId)
+        try {   
+                const userCart = await db.collection("cart").find({id: userId}).toArray()
+                res.send(userCart)
         } catch (error) {
                 res.status(500).send(error.message)
         }
