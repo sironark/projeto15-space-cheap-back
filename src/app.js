@@ -52,6 +52,19 @@ app.get("/cart/:userId", async (req,res)=>{
         }
 })
 
+app.delete("/purchase/:userId", async (req,res)=>{
+        const { userId } = req.params
+        if (!userId) return res.sendStatus(404)
+
+        try {
+                const result = await db
+                .collection("cart")
+                .deleteMany({id: userId})
+        if (result.deletedCount === 0) return res.sendStatus(404)
+        res.sendStatus(202)
+        } catch (error) {res.send(error.message).status(500)}
+})
+
 // servidor rodando na porta 5000
 const port = process.env.PORT || 5000
 app.listen(port, () => console.log(`Running server on port ${port}`))
