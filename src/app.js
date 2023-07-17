@@ -1,8 +1,7 @@
 import express from "express"
 import cors from "cors"
-import { MongoClient } from "mongodb";
+import { MongoClient, ObjectId } from "mongodb";
 import dotenv from "dotenv"
-import ships from "./products/products.js"
 
 const app = express();
 app.use(express.json());
@@ -21,23 +20,18 @@ mongoClient.connect()
         .catch((err) => console.log(err.message))
 
 
-app.get('/products', async (req, res) => {
+app.get('/product/:id', async (req, res) => {
+        //const {id}= req.params
         
         try {
-                const list = await db.collection('products').find().toArray()
-               
-                if (list.length === 0) {
-                        await db.collection('products').insertMany(ships)
-                        return res.status(200).send(ships)
-                        
-                } else {
-                       
-                        return res.status(200).send(list)
-                }
+                const choiceShip = await db.collection('products').findOne({ _id: new ObjectId(id)})
+                if(choiceShip) return res.status(200).send(choiceShip)
+                
 
         } catch (error) {
                 return res.status(500).send(error)
         }
+        
 })
 
 app.get("/cart/:userId", async (req,res)=>{
