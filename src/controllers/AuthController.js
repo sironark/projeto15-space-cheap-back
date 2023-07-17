@@ -1,5 +1,5 @@
 import bcrypt, { hash } from "bcrypt";
-import { v4 as uid } from "uuid";
+import { v4 as uuid } from "uuid";
 import dotenv from "dotenv";
 import conexaoDatabase from "../database/DatabaseConnection.js"
 
@@ -7,6 +7,7 @@ dotenv.config();
 
 export async function login(req, res) {
   const { email, password } = req.body;
+
   try {
     const db = await conexaoDatabase();
 
@@ -16,9 +17,9 @@ export async function login(req, res) {
     const senhaCorreta = bcrypt.compareSync(password, user.password);
     if (!senhaCorreta) return res.status(401).send("Senha incorreta!");
 
-    const token = uid();
+    const token = uuid();
     await db.collection("sessions").insertOne({ token, userId: user._id });
-    res.send({ token, userName: user.name });
+    res.send({ token, userName: user.name, userId: user._id });
   } catch (error) {
     console.log(error);
     res.status(500).send({ errors: ["Erro interno"] });
