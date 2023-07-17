@@ -17,8 +17,14 @@ app.post('/sign-up', register)
 
 app.post('/login', login)
 
-app.get('/home', async (req, res) => {
+app.get('/products', async (req, res) => {
+        const db = await conexaoDatabase();
         try {
+                const allShips = await db.collection('products').find().toArray()
+                console.log(allShips)
+                if(!allShips){
+                await db.collection('products').insertMany(ships)
+                }
                 const products = await db.collection("products").find().toArray()
                 return res.status(200).send(products)
         } catch (error) {
@@ -33,13 +39,7 @@ app.get('/product/:shipId', async (req, res) => {
         console.log(shipId)
         
         try {
-
-                const allShips = await db.collection('products').find().toArray()
-                console.log(allShips)
-                if(!allShips){
-                await db.collection('products').insertMany(ships)
-                }
-                
+        
                 const choiceShip = await db.collection('products').findOne({_id:new ObjectId(shipId)})
                 if(choiceShip) return res.status(200).send(choiceShip)
         } catch (error) {
