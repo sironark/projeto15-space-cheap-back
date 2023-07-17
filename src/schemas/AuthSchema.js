@@ -12,3 +12,11 @@ export const loginSchema = joi.object({
   password: joi.string().required().min(3)
 
 })
+
+export const registerSchema = joi.object({
+  name: joi.string().required(),
+  email: joi.string().email().required(),
+  password: joi.string().required().min(3),
+  confPassword: joi.string().required().min(3)
+
+})

@@ -16,4 +16,5 @@ export default async function conexaoDatabase() {
   }
 }
 
+
 export const db = client.db();
